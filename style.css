@@ -1,19 +1,33 @@
 * {
-    font-family: 'Roboto Mono', monospace;
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto Mono', monospace;
 }
 
 body {
     background: rgb(60, 143, 133);
-    background: linear-gradient(180deg, rgba(60, 143, 133, 1) 0%, rgba(58, 98, 144, 1) 35%, rgba(97, 121, 134, 1) 68%, rgba(127, 189, 179, 1) 100%);
+    background: radial-gradient(circle, rgba(60, 143, 133, 1) 0%, rgba(58, 98, 144, 1) 35%, rgba(97, 121, 134, 1) 68%, rgba(127, 189, 179, 1) 100%);
 }
 
 h1 {
     text-align: center;
 }
 
+section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+input {
+    width: 50vh;
+    padding: 10px;
+    margin-bottom: 20px;
+    outline: none;
+    border: 10px soid #CCD1E4;
+}
 
 #userContainer {
     display: flex;
@@ -37,7 +51,7 @@ h1 {
 .user-card:hover {
     cursor: pointer;
     box-shadow: 2px 2px 7px black;
-    transform: scale(1.05);
+    transform: scale(1.04);
 
 }
 
@@ -61,4 +75,8 @@ h1 {
 .userEmail {
     font-size: 15px;
     overflow: hidden;
+}
+
+.filter {
+    display: none;
 }

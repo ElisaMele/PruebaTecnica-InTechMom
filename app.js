@@ -1,59 +1,75 @@
-        function generateUsers() {
-            const numberOfUsers = 20;
+document.addEventListener("keyup", e => {
+    if (e.target.matches('#buscador')){
+        const searchTerm = e.target.value.toLowerCase();
+        
+        document.querySelectorAll('.user-card').forEach(userCard => {
+            const userName = userCard.querySelector('.userName').textContent.toLowerCase();
 
-            fetch(`https://randomuser.me/api/?results=${numberOfUsers}`)
-                .then(response => response.json())
-                .then(data => {
-                    const userContainer = document.getElementById('userContainer');
-                    userContainer.innerHTML = '';
+            if (userName.includes(searchTerm)) {
+                userCard.classList.remove('filter');
+            } else {
+                userCard.classList.add('filter');
+            }
+        });
+    }
+});
 
-                    data.results.forEach(user => {
-                        const userCard = document.createElement('div');
-                        userCard.classList.add('user-card');
+function generateUsers() {
+    const numberOfUsers = 40;
 
-                        const userImage = document.createElement('img');
-                        userImage.classList.add('user-image');
-                        userImage.src = user.picture.large;
-                        userImage.alt = 'User Image';
+    fetch(`https://randomuser.me/api/?results=${numberOfUsers}`)
+        .then(response => response.json())
+        .then(data => {
+            const userContainer = document.getElementById('userContainer');
+            userContainer.innerHTML = '';
 
-                        const userDetails = document.createElement('div');
-                        userDetails.classList.add('user-details');
+            data.results.forEach(user => {
+                const userCard = document.createElement('div');
+                userCard.classList.add('user-card');
 
-                        const userName = document.createElement('p');
-                        userName.classList.add('userName');
-                        userName.textContent = `${user.name.first} ${user.name.last}`;
+                const userImage = document.createElement('img');
+                userImage.classList.add('user-image');
+                userImage.src = user.picture.large;
+                userImage.alt = 'User Image';
 
-                        const userAddress = document.createElement('p');
-                        userAddress.textContent = `${user.location.street.number} ${user.location.street.name}, ${user.location.city}, ${user.location.state}, ${user.location.country}`;
+                const userDetails = document.createElement('div');
+                userDetails.classList.add('user-details');
 
-                        const userPhone = document.createElement('p');
-                        userPhone.classList.add('userPhone');
-                        userPhone.textContent = `Teléfono: ${user.phone}`;
+                const userName = document.createElement('p');
+                userName.classList.add('userName');
+                userName.textContent = `${user.name.first} ${user.name.last}`;
 
-                        const userEmail = document.createElement('p');
-                        userEmail.classList.add('userEmail');
-                        userEmail.textContent = `Email: ${user.email}`;
+                const userAddress = document.createElement('p');
+                userAddress.textContent = `${user.location.street.number} ${user.location.street.name}, ${user.location.city}, ${user.location.state}, ${user.location.country}`;
 
-                        const userGender = document.createElement('p');
-                        userGender.classList.add('userGender');
-                        userGender.innerHTML = `Género: ${user.gender}`;
+                const userPhone = document.createElement('p');
+                userPhone.classList.add('userPhone');
+                userPhone.textContent = `Teléfono: ${user.phone}`;
+
+                const userEmail = document.createElement('p');
+                userEmail.classList.add('userEmail');
+                userEmail.textContent = `Email: ${user.email}`;
+
+                const userGender = document.createElement('p');
+                userGender.classList.add('userGender');
+                userGender.innerHTML = `Género: ${user.gender}`;
 
 
-                        userDetails.appendChild(userName);
-                        userDetails.appendChild(userAddress);
-                        userDetails.appendChild(userPhone);
-                        userDetails.appendChild(userEmail);
-                        userDetails.appendChild(userGender);
+                userDetails.appendChild(userName);
+                userDetails.appendChild(userAddress);
+                userDetails.appendChild(userPhone);
+                userDetails.appendChild(userEmail);
+                userDetails.appendChild(userGender);
 
-                        userCard.appendChild(userImage);
-                        userCard.appendChild(userDetails);
+                userCard.appendChild(userImage);
+                userCard.appendChild(userDetails);
 
-                        userContainer.appendChild(userCard.cloneNode(true));
-                    });
-                })
-                .catch(error => {
-                    console.error('Error al obtener usuarios:', error);
-                });
-        }
+                userContainer.appendChild(userCard.cloneNode(true));
+            });
+        })
+        .catch(error => {
+            console.error('Error al obtener usuarios:', error);
+        });
+}
 
-        document.addEventListener('DOMContentLoaded', generateUsers);
+document.addEventListener('DOMContentLoaded', generateUsers);
